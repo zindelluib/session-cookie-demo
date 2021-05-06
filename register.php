@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,21 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+	<?php
+		include 'includes/formhelper.php';
+		$errors  = array();
+		$formData  = array();
+
+		if(isset($_SESSION['reg_err'])){
+			$errors  = $_SESSION['reg_err'];
+			unset($_SESSION['reg_err']);
+		}
+
+		if(isset($_SESSION['reg_form_data'])){
+			$formData  = $_SESSION['reg_form_data'];
+			unset($_SESSION['reg_form_data']);
+		}
+	?>
 	<div class="flex-container" style="margin-top: 50px;">
 		<img src="images/logo.png" id="login-logo">
 	</div>
@@ -15,23 +31,28 @@
 		<form action="create_user.php" style="width: 318px;" method="post">
 			<div class="form-box">
 				<label>First Name:&nbsp; </label><br>
-				<input type="text" name="firstname" class="form-input">
+				<input type="text" name="firstname" class="form-input" value="<?php echo retype($formData,'firstname'); ?>">
+				<?php displayError($errors,'firstname'); ?>
 			</div>
 			<div class="form-box">
 				<label>Last Name:&nbsp; </label><br>
-				<input type="text" name="lastname" class="form-input">
+				<input type="text" name="lastname" class="form-input" value="<?php echo retype($formData,'lastname'); ?>">
+				<?php displayError($errors,'lastname'); ?>
 			</div>
 			<div class="form-box">
 				<label>Username:&nbsp; </label><br>
-				<input type="text" name="username" class="form-input">
+				<input type="text" name="username" class="form-input" value="<?php echo retype($formData,'username'); ?>">
+				<?php displayError($errors,'username'); ?>
 			</div>
 			<div class="form-box">
 				<label>Email:&nbsp; </label><br>
-				<input type="email" name="email" class="form-input">
+				<input type="email" name="email" class="form-input" value="<?php echo retype($formData,'email'); ?>">
+				<?php displayError($errors,'email'); ?>
 			</div>
 			<div class="form-box">
 				<label>Password:&nbsp; </label><br>
 				<input type="password" name="password" class="form-input">
+				<?php displayError($errors,'password'); ?>
 			</div>
 			<div class="form-box">
 				<small>By clicking "Register" , you agree to our <a href="#">Terms and Data Policy</a></small>

@@ -21,6 +21,10 @@
 				<label>Password:&nbsp;</label><br>
 				<input type="password" name="password"  class="form-input">
 			</div>
+			<div class="form-box">
+				<input type="checkbox" name="remember" >
+				<label>Remember Me</label>
+			</div>
 			<input type="submit" name="submit" value="Login" id="login-btn">
 		</form>
 	</div>
