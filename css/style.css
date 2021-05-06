@@ -1,0 +1,42 @@
+*{
+	box-sizing: border-box;
+
+}
+
+.flex-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#back,#register-btn , #login-btn {
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+	color: #fff;
+	border: 1px solid #4CAF50;
+	height: 30px;
+	background-color: #4CAF50;
+}
+
+.form-box {
+	
+	margin-bottom: 20px;
+}
+
+.form-input {
+	height: 29px;
+	width: 100%;
+    border: 1px solid black;
+    border-radius: 9px;
+    padding: 5px;
+    font-size: 0.9375em;
+}
+
+
+#login-logo {
+    height: 127px;
+    width: 132px;
+}
+
+	
