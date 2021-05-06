@@ -11,4 +11,9 @@
 		return "";
 	}
 
+	function getSavedUser(){
+		if(isset($_COOKIE['username']))
+			return $_COOKIE['username'];
+		return null;
+	}
 ?>

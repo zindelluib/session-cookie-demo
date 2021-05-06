@@ -8,21 +8,22 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+	<?php include 'includes/formhelper.php'; ?>
 	<div class="flex-container" style="margin-top: 50px;">
 		<img src="images/logo.png" id="login-logo">
 	</div>
 	<div class="flex-container">
-		<form style="width: 318px;" method="post">
+		<form action="authenticate.php" style="width: 318px;" method="post">
 			<div class="form-box">
 				<label>Username:&nbsp; </label><br>
-				<input type="text" name="username" class="form-input">
+				<input type="text" name="username" class="form-input" value="<?php echo getSavedUser(); ?>">
 			</div>
 			<div class="form-box">
 				<label>Password:&nbsp;</label><br>
 				<input type="password" name="password"  class="form-input">
 			</div>
 			<div class="form-box">
-				<input type="checkbox" name="remember" >
+				<input type="checkbox" name="remember">
 				<label>Remember Me</label>
 			</div>
 			<input type="submit" name="submit" value="Login" id="login-btn">
