@@ -26,40 +26,44 @@
 				'email' => isset($_POST['email'])? $_POST['email']:""
 			);
 			header("Location: register.php");
+
 		}
 		//end of validation
+		else{
+
+			$fname   = $_POST['firstname'];
+			$lname   = $_POST['lastname'];
+			$username  = $_POST['username'];
+			$email  = $_POST['email'];
+			$password  = password_hash($_POST['password'], PASSWORD_DEFAULT); // hash your password 
+
+
+			include 'includes/db.php';	
+			$con   = getConnection();
+			$query  = "INSERT INTO users_t(fname,lname,username,email,password) 
+			VALUES(:fname,:lname,:username,:email,:password)";
+			$stmt  = $con->prepare($query);
+
+			$stmt->bindParam(':fname',$fname);
+			$stmt->bindParam(':lname',$lname);
+			$stmt->bindParam(':username',$username);
+			$stmt->bindParam(':email',$email);
+			$stmt->bindParam(':password',$password);
+
+			$stmt->execute();
+			$inserted  = $stmt->rowCount();
+
+			if($inserted){
+				$_SESSION['isloggedin']    = true;
+				$_SESSION['username']  =  $username;
+				header('Location: dashboard.php');
+			}
+			else {
+				echo "An error occured. Please try again!";
+			}
+		}
+
 		
-
-		$fname   = $_POST['firstname'];
-		$lname   = $_POST['lastname'];
-		$username  = $_POST['username'];
-		$email  = $_POST['email'];
-		$password  = password_hash($_POST['password'], PASSWORD_DEFAULT); // hash your password 
-
-
-		include 'includes/db.php';	
-		$con   = getConnection();
-		$query  = "INSERT INTO users_t(fname,lname,username,email,password) 
-		VALUES(:fname,:lname,:username,:email,:password)";
-		$stmt  = $con->prepare($query);
-
-		$stmt->bindParam(':fname',$fname);
-		$stmt->bindParam(':lname',$lname);
-		$stmt->bindParam(':username',$username);
-		$stmt->bindParam(':email',$email);
-		$stmt->bindParam(':password',$password);
-
-		$stmt->execute();
-		$inserted  = $stmt->rowCount();
-
-		if($inserted){
-			$_SESSION['isloggedin']    = true;
-			$_SESSION['username']  =  $username;
-			header('Location: dashboard.php');
-		}
-		else {
-			echo "An error occured. Please try again!";
-		}
 		
 
 
